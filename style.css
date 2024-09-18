@@ -1,0 +1,272 @@
+@font-face {
+  font-family: 'rubik';
+  src: url(./font/Rubik-VariableFont_wght.ttf);
+}
+:root{
+  --Moderate-blue: hsl(238, 40%, 52%);
+  --Soft-Red: hsl(358, 79%, 66%);
+  --Light-grayish-blue: hsl(239, 57%, 85%);
+  --Pale-red: hsl(357, 100%, 86%);
+  --Dark-blue: hsl(212, 24%, 26%);
+  --Grayish-Blue: hsl(211, 10%, 45%);
+  --Light-gray: hsl(223, 19%, 93%);
+  --Very-light-gray: hsl(228, 33%, 97%);
+  --White: hsl(0, 0%, 100%);
+  --pad-x: 24px;
+  --pad-y: 26px;
+}
+body{
+  margin: 0;
+  font-family: 'rubik', sans-serif;
+  background-color: var(--Very-light-gray);
+}
+button{
+  font-family: 'rubik', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+}
+main {
+  max-width: 1440px;
+  min-height: 130vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-block: 62px;
+  box-sizing: border-box;
+  margin-inline: 16px;
+  
+}
+main .comments-section{
+  max-width: 730px;
+  margin-bottom: 16px;
+}
+.comment .comment-body {
+  padding: var(--pad-y) var(--pad-x);
+  width: 100%;
+  min-height: 100px;
+  background-color: #fff;
+  border-radius: 6px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+}
+.comment .comment-body .rating{
+  padding-right: 24px;
+}
+.comment .comment-body .rating button{
+  border: none;
+  background-color: var(--Very-light-gray);
+  color: var(--Moderate-blue);
+  border-radius: 10px;
+  padding: 0;
+  width: 40px;
+  height: 100px;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-rows: repeat(3, 1fr);
+}
+.comment .comment-body .rating button img{
+  padding: 8px;
+}
+.comment .comment-body .rating button img:is(:hover, :focus){
+  filter: brightness(.5);
+}
+.comment .comment-body .rating button.no-plus img:first-child,
+.comment .comment-body .rating button.no-minus img:last-child{
+  filter: brightness(.5);
+}
+.comment .comment-body .data .header{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.comment .comment-body .data .header .user{
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+}
+.comment .comment-body .data .header .user img{
+  --d: 31px;
+  width: var(--d);
+  height: var(--d);
+}
+.comment .comment-body .data .header .user .username {
+  margin: 0;
+  font-weight: 500;
+  color: var(--Dark-blue);
+}
+.comment.is-own-comment .comment-body .data .header .user .username{
+  display: flex;
+  column-gap: 8px;
+}
+.comment.is-own-comment .comment-body .data .header .user .username .you{
+  background-color: var(--Moderate-blue);
+  color: white;
+  font-size: .75rem;
+  padding: 1px 7px;
+  border-radius: 3px;
+}
+
+.comment .comment-body .data .header .user .date {
+  margin: 0;
+  color: var(--Grayish-Blue);
+}
+.comment .comment-body .data .header .comment-actions button{
+  column-gap: 8px;
+  border: none;
+  background-color: transparent;
+  color: var(--Moderate-blue);
+  padding: 5px 1px;
+  display: flex;
+  align-items: center;
+}
+.comment .comment-body .data .header .comment-actions button:is(:hover, :focus){
+  filter: brightness(1.5);
+}
+.comment .comment-body .data .header .comment-actions button:is(:first-child, :nth-child(2)),
+.comment.is-own-comment .comment-body .data .header .comment-actions button:last-child{
+  display: none;
+}
+.comment.is-own-comment .comment-body .data .header .comment-actions{
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+.comment.is-own-comment .comment-body .data .header .comment-actions button:first-child{
+  color: var(--Soft-Red);
+}
+.comment.is-own-comment .comment-body .data .header .comment-actions button:is(:first-child, :nth-child(2)){
+  display: flex;
+  column-gap: 10px;
+}
+.comment .comment-body .data .comment-content{
+  line-height: 150%;
+  color: var(--Grayish-Blue);
+}
+.comment .comment-replies{
+  border-left: 2px solid var(--Light-gray);
+  margin-left: 44px;
+  padding-left: 44px;
+}
+.comment .comment-replies .comment-body{
+  margin-bottom: 20px;
+}
+.comment .comment-replies .comment-body:last-child{
+  margin-bottom: 0;
+}
+.comment .comment-replies .comment-body .data .comment-content .replyingTo{
+  font-weight: 500;
+  color: var(--Moderate-blue);
+}
+
+
+main .comment-input{
+  background-color: #fff;
+  width: clamp(300px, 100%, 730px);
+  max-width: 730px;
+  height: 145px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  box-sizing: border-box;
+  align-items: start;
+  border-radius: 6px;
+}
+main .comment-input .user{
+  width: 40px;
+  margin: 28px 16px 28px 24px;
+}
+main .comment-input .input{
+  align-self: center;
+  height: 94px;
+  outline: none;
+  border-radius: 8px;
+  border: 1px solid var(--Light-gray);
+  font-size: 1rem;
+  padding: 12px 24px;
+  box-sizing: border-box;
+  font-family: 'rubik', sans-serif;
+  resize: none;
+  min-width: 0;
+}
+main .comment-input .send{
+  margin: 24px 24px 0 16px;
+  width: 104px;
+  min-height: 48px;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  background-color: var(--Moderate-blue);
+
+  &:hover{
+    background-color: var(--Light-grayish-blue);
+  }
+}
+
+@media (min-width: 1440px) {
+  main{
+    margin: 0 auto;
+  }
+}
+@media (max-width: 700px) {
+  :root{
+    --pad-x: 20px;
+    --pad-y: 22px;
+  }
+  .comment .comment-body {
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+    position: relative;
+  }
+  .comment .comment-body .rating{
+    grid-row: 2 / 3;
+  }
+  .comment .comment-body .rating button{
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: revert;
+    height: 35px;
+    width: 90px;
+  }
+  .comment .comment-body .data .header .comment-actions{
+    position: absolute;
+    right: var(--pad-x);
+    bottom: var(--pad-y);
+  }
+  .comment .comment-replies{
+    margin-left: 2px;
+    padding-left: 16px;
+  }  
+  main .comment-input{
+    padding: var(--pad-y) var(--pad-x);
+    height: revert;
+  }
+  main .comment-input .input{
+    grid-column: span 3;
+    grid-row: 1 / 2;
+  }
+  main .comment-input :not(.input){
+    margin: var(--pad-y) 0 0 0;
+  }
+  main .comment-input .send{
+    grid-column: 3/4;
+  }
+}
+
+@media (max-width: 400px){
+  :root{
+    --pad-x: 18px;
+    --pad-y: 18px;
+  }
+  .comment.is-own-comment .comment-body .data .header .comment-actions {
+    column-gap: 10px;
+
+  }
+  .comment.is-own-comment .comment-body .data .header .comment-actions button{
+    column-gap: 4px;
+  }
+  .comment .comment-body .rating button{
+    width: 85px;
+  }
+}
