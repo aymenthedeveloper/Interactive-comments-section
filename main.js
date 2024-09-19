@@ -70,6 +70,7 @@ const db = {
   lastId: 0,
   editTargetId: 0,
   replyTargetId: 0,
+  deleteTargetId: 0,
   rating: {},
   commentsRating: {}
 }
@@ -78,7 +79,9 @@ const CommentsSection = document.querySelector('main .comments-section');
 const CommentInputContainer = document.querySelector('main .comment-input');
 const CommentInput = document.querySelector('main .comment-input .input');
 const CommentSendBtn = document.querySelector('main .comment-input .send');
-
+const modal = document.querySelector('.modal');
+const CancelDelete = document.querySelector('.modal .btns .cancel');
+const confirmDelete = document.querySelector('.modal .btns .delete');
 
 function getCommentHtml(comment){
   const {id, content, score, createdAt, user, replies, replyingTo} = comment;
@@ -108,7 +111,7 @@ function getCommentHtml(comment){
             <p class="date ">${createdAt}</p>
           </div>
           <div class="comment-actions" data-id="${id}">
-            <button onclick="deleteComment(event)"><img src="./images/icon-delete.svg" alt="" > Delete</button>
+            <button onclick="showConfirmation(event)"><img src="./images/icon-delete.svg" alt="" > Delete</button>
             <button onclick="editComment(event)"><img src="./images/icon-edit.svg" alt=""> Edit</button>
             <button onclick="replyToComment(event)"><img src="./images/icon-reply.svg" alt=""> Reply</button>
           </div>
@@ -134,7 +137,6 @@ function resetInput(){
 
 function loadComments(){
   for (const key in comments) {
-    
     let comment = getCommentHtml(comments[key])
     CommentsSection.insertAdjacentHTML('beforeend', comment)
   }
@@ -160,12 +162,24 @@ CommentSendBtn.addEventListener('click', ()=>{
   }
   resetInput()
 })
+CancelDelete.addEventListener('click', ()=>{
+  modal.close()
+})
+confirmDelete.addEventListener('click', ()=>{
+  deleteComment()
+  modal.close()
+})
 
 
 loadComments();
 
-function deleteComment(event){
-  const id = event.target.parentNode.dataset.id;
+
+function showConfirmation(event){
+  modal.showModal();
+  db.deleteTargetId = event.target.parentNode.dataset.id;
+}
+function deleteComment(){
+  const id = db.deleteTargetId;
   const comment = document.querySelector(`.comment[data-id="${id}"]`);
   if (comment.classList.contains('is-own-comment')) comment.remove();
   if (id == db.editTargetId) resetInput();

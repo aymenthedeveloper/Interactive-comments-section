@@ -204,6 +204,44 @@ main .comment-input .send{
     background-color: var(--Light-grayish-blue);
   }
 }
+.modal{
+  border: none;
+  width: clamp(100px, 100%, 400px);
+  padding: 32px 32px;
+  position: relative;
+  border-radius: 8px;
+  box-sizing: border-box;
+  position: fixed;
+  
+}
+.modal h2{
+  margin-top: 0;
+}
+.modal p{
+  line-height: 145%;
+}
+.modal .btns{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 16px;
+  margin-top: 20px;
+}
+.modal .btns button{
+  border: none;
+  border-radius: 8px;
+  height: 50px;
+  color: white;
+}
+.modal .btns button:hover{
+  filter: brightness(1.25);
+}
+.modal .btns button.cancel{
+  background-color: var(--Moderate-blue);
+}
+.modal .btns button.delete{
+  background-color: var(--Soft-Red);
+}
+
 
 @media (min-width: 1440px) {
   main{
@@ -259,14 +297,19 @@ main .comment-input .send{
     --pad-x: 18px;
     --pad-y: 18px;
   }
+  .comment .comment-body .data .header .user .date {
+    font-size: 12px;
+  }
   .comment.is-own-comment .comment-body .data .header .comment-actions {
     column-gap: 10px;
-
   }
   .comment.is-own-comment .comment-body .data .header .comment-actions button{
     column-gap: 4px;
   }
   .comment .comment-body .rating button{
     width: 85px;
+  }
+  .modal{
+    padding: 24px;
   }
 }
