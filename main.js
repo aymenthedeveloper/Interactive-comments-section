@@ -128,11 +128,11 @@ function getCommentHtml(comment){
     </div>`
   }
   
-function resetInput(){
-  CommentSendBtn.innerHTML = "SEND";
-  CommentSendBtn.setAttribute('mode', '')
-  CommentInput.value = null;
-  CommentInput.setAttribute('placeholder', `Add a comment...`)
+function resetInput(action="SEND", mode='', value=null, placeholder="Add a comment..."){
+  CommentSendBtn.innerHTML = action;
+  CommentSendBtn.setAttribute('mode', mode)
+  CommentInput.value = value;
+  CommentInput.setAttribute('placeholder', placeholder)
 }
 
 function loadComments(){
@@ -188,17 +188,14 @@ function deleteComment(){
 function replyToComment(event){
   db.replyTargetId = event.target.parentNode.dataset.id;
   const comment = document.querySelector(`.comment[data-id="${db.replyTargetId}"]`);
-  CommentSendBtn.setAttribute('mode', 'reply')
-  CommentSendBtn.innerHTML = "REPLY";
-  CommentInput.value = null;
-  CommentInput.setAttribute('placeholder', `Reply to @${comment.dataset.username}...`)
+  resetInput("REPLY", "reply", null, `Reply to @${comment.dataset.username}...`)
+  CommentInput.focus()
 }
 function editComment(event){
   db.editTargetId = event.target.parentNode.dataset.id;
   const comment = document.querySelector(`.comment[data-id="${db.editTargetId}"]`);
-  CommentSendBtn.setAttribute('mode', 'edit')
-  CommentSendBtn.innerHTML = "EDIT";
-  CommentInput.value = comment.querySelector('.data .comment-content .content').textContent.trim();
+  const commentContent = comment.querySelector('.data .comment-content .content').textContent.trim();
+  resetInput("EDIT", "edit", commentContent, 'Edit your comment...')
 }
 function changeRating(event) {
   id = event.target.dataset.id ?? event.target.parentNode.dataset.id;
