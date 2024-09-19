@@ -176,6 +176,7 @@ loadComments();
 
 function showConfirmation(event){
   modal.showModal();
+  console.log('modal opened');
   db.deleteTargetId = event.target.parentNode.dataset.id;
 }
 function deleteComment(){
