@@ -196,6 +196,7 @@ function editComment(event){
   const comment = document.querySelector(`.comment[data-id="${db.editTargetId}"]`);
   const commentContent = comment.querySelector('.data .comment-content .content').textContent.trim();
   resetInput("EDIT", "edit", commentContent, 'Edit your comment...')
+  CommentInput.focus()
 }
 function changeRating(event) {
   id = event.target.dataset.id ?? event.target.parentNode.dataset.id;
